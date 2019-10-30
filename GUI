@@ -1,0 +1,313 @@
+GUI编程
+tkinter
+一.	标签Label
+1.
+import tkinter
+top=tkinter.Tk()
+labell=tkinter.Label(top,text='hello,Python')
+labell.pack()
+top.mainloop()
+
+2.pack布局
+import tkinter
+top=tkinter.Tk()
+top.geometry('320x120+0+0')
+label1=tkinter.Label(top,text="北京")
+label2=tkinter.Label(top,text="上海")
+label3=tkinter.Label(top,text="广州")
+label4=tkinter.Label(top,text="深圳")
+label1.pack(side='left',fill='both')
+label2.pack(side='right',fill='both',padx=5,pady=3)
+label3.pack(side='top',fill='x',expand='yes',anchor='n')
+label4.pack(side='bottom',expand='yes',anchor='s')
+top.mainloop()
+
+3.grid布局
+import tkinter
+top=tkinter.Tk()
+top.geometry('420x180+0+0')
+label1=tkinter.Label(top,text="北京")
+label2=tkinter.Label(top,text="上海")
+label3=tkinter.Label(top,text="广州")
+label4=tkinter.Label(top,text="深圳")
+label5=tkinter.Label(top,text="成都")
+label6=tkinter.Label(top,text="重庆")
+label7=tkinter.Label(top,text="武汉")
+label8=tkinter.Label(top,text="南京")
+label1.grid(row=0,column=0,padx=50,pady=10)
+label2.grid(row=0,column=1)
+label3.grid(row=1,column=1,padx=50,pady=10)
+label4.grid(row=1,column=2)
+label5.grid(row=2,column=2)
+label6.grid(row=2,column=3)
+label7.grid(row=2,column=4)
+label8.grid(row=2,column=5)
+top.mainloop()
+4.文字标签
+import tkinter
+root=tkinter.Tk()
+root.geometry('300x100+0+0')
+root.wm_title('标签组件示例')
+label1=tkinter.Label(root,text='高级语言程序设计\n--Python',\
+                     height=4,width=20,relief='ridge',\
+                     background='#ffffff',foreground='#ff0000',\
+                     anchor='center',font='黑体',cursor='man')
+label1.grid(row=0,column=1,padx=60)
+root.mainloop()
+
+
+二.button按钮
+5
+import sys
+import tkinter
+top=tkinter.Tk()
+top.geometry('310x180+100+100')
+top.wm_title('按钮组件示例')
+
+def prt_label():
+    label1=tkinter.Label(top,text='Hello Python!')
+    label1.grid(row=0,column=1)
+
+btn1=tkinter.Button(top,text="Click me",height=2,width=12,\
+                    borderwidth=5,command=prt_label)
+btn2=tkinter.Button(top,text="Exit",height=2,width=12,\
+                    borderwidth=5,command=sys.exit)
+btn1.grid(row=1,column=0,padx=5,pady=100)
+btn2.grid(row=1,column=2,padx=10)
+top.mainloop()
+
+
+6.bind()函数
+import sys
+import tkinter
+top=tkinter.Tk()
+top.geometry('310x180+100+100')
+top.wm_title('按钮组件bind()示例')
+
+def prt_label(x):
+    label1=tkinter.Label(top,text='Hello Python!')
+    label1.grid(row=0,column=1)
+
+btn1=tkinter.Button(top,text="Click me",height=2,width=12,\
+                    borderwidth=5)
+btn1.bind('<Button-1>',prt_label)
+btn2=tkinter.Button(top,text="Exit",height=2,width=12,\
+                    borderwidth=5,command=sys.exit)
+btn1.grid(row=1,column=0,padx=5,pady=100)
+btn2.grid(row=1,column=2,padx=10)
+top.mainloop()
+
+三．输入框Entry和文本框组件Text
+7.输入框
+import tkinter
+top=tkinter.Tk()
+top.geometry('300x100+50+50')
+top.wm_title('输入框示例')
+v=tkinter.StringVar()
+en1=tkinter.Entry(top,textvariable=v)
+en1.pack()
+v.set('输入框示例')
+top.mainloop()
+
+
+8.登录界面 用户名密码
+import sys
+import tkinter
+import re
+top=tkinter.Tk()
+top.geometry('400x170+350+150')
+top.wm_title('输入框示例')
+
+def validateText():
+    val=entry1.get()
+    if re.findall('^[0-9a-zA-Z_]{1,}$',str(val)):
+        return True
+    else:
+        label3['text']='用户名只能包含字母、数字、下划线'
+        return False
+
+def anw_button():
+    if str.upper(entry1.get())=='PYTHON'and entry2.get()=='python_123':
+        label3['text']='登录成功'
+    else:
+        label3['text']='用户名或密码错误，请重新输入!'
+
+label1=tkinter.Label(top,text='用户名:',font=('宋体','18'))
+label1.grid(row=0,column=0)
+label2=tkinter.Label(top,text='密码：',font=('宋体','18'))
+label2.grid(row=1,column=0)
+v=tkinter.StringVar()
+entry1=tkinter.Entry(top,font=('宋体','18'),textvariable=v,\
+                     validate='focusout',validatecommand=validateText)
+entry1.grid(row=0,column=1)
+entry1.focus_force()
+entry2=tkinter.Entry(top,font=('宋体','18'),show='*')
+entry2.grid(row=1,column=1)
+button1=tkinter.Button(top,text='登录',font=('宋体','18'),\
+                       command=anw_button)
+button1.grid(row=2,column=0,padx=50,pady=10)
+button2=tkinter.Button(top,text='退出',font=('宋体','18'),\
+                       command=sys.exit)
+button2.grid(row=2,column=1,padx=80,pady=10)
+label3=tkinter.Label(top,text='信息提示区',font=('华文新魏','16'),\
+                     relief='ridge',width=30)
+label3.grid(row=3,column=0,padx=10,pady=10,columnspan=2,sticky='s')
+top.mainloop()
+
+
+四．复选按钮Checkbutton和单选按钮组件Radiobutton
+9.
+import tkinter
+import tkinter.font as tkFont
+top=tkinter.Tk()
+top.geometry('400x200+350+150')
+top.wm_title('复选按钮与单选按钮实例')
+
+def func_cb():
+    if x.get()==1 and y.get()==0 and z.get()==0:
+        entry1['font']=tkFont.Font(family='宋体',size=20,weight='bold')
+    elif x.get()==1 and y.get()==0 and z.get()==1:
+        entry1['font']=tkFont.Font(family='宋体',size=20,weight='bold',underline=1)
+    elif x.get() == 1 and y.get() == 1 and z.get() == 0:
+        entry1['font']=tkFont.Font(family='宋体',size=20,weight='bold',slant='italic')
+    elif x.get() == 1 and y.get() == 1 and z.get() == 1:
+        entry1['font']=tkFont.Font(family='宋体',size=20,weight='bold',slant='italic',underline=1)
+    elif x.get() == 0 and y.get() == 0 and z.get() == 0:
+        entry1['font']=tkFont.Font(family='宋体',size=20)
+    elif x.get() == 0 and y.get() == 0 and z.get() == 1:
+        entry1['font']=tkFont.Font(family='宋体',size=20,underline=1)
+    elif x.get() == 0 and y.get() == 1 and z.get() == 0:
+        entry1['font']=tkFont.Font(family='宋体',size=20,slant='italic')
+    elif x.get() == 0 and y.get() == 1 and z.get() == 1:
+        entry1['font']=tkFont.Font(family='宋体',size=20,slant='italic',underline=1)
+
+def func_rb1():
+    entry2['font']=('华文新魏',20)
+def func_rb2():
+    entry2['font']=('华文新魏',24)
+def func_rb3():
+    entry2['font']=('华文新魏',28)
+
+v=tkinter.StringVar()
+entry1=tkinter.Entry(top,font=('宋体','24'),textvariable=v)
+entry1.grid(row=0,column=0,columnspan=4)
+entry1.focus_force()
+
+w=tkinter.StringVar()
+entry2=tkinter.Entry(top,font=('宋体','18'),textvariable=w)
+entry2.grid(row=2,column=0,columnspan=4)
+
+global x,y,z
+x=tkinter.IntVar()
+cb1=tkinter.Checkbutton(top,text='粗体',command=func_cb,variable=x)
+cb1.grid(row=1,column=0)
+y=tkinter.IntVar()
+cb2=tkinter.Checkbutton(top,text='斜体',command=func_cb,variable=y)
+cb2.grid(row=1,column=1)
+z=tkinter.IntVar()
+cb3=tkinter.Checkbutton(top,text='下划线',command=func_cb,variable=z)
+cb3.grid(row=1,column=2)
+
+rb1=tkinter.Radiobutton(top,text='20号',command=func_rb1)
+rb1.grid(row=3,column=0)
+rb2=tkinter.Radiobutton(top,text='24号',command=func_rb2)
+rb2.grid(row=3,column=1)
+rb3=tkinter.Radiobutton(top,text='28号',command=func_rb3)
+rb3.grid(row=3,column=2)
+
+a=tkinter.IntVar()
+rb1['variable'],rb2['variable'],rb3['variable']=a,a,a
+rb1['value'],rb2['value'],rb3['value']=1,2,3
+top.mainloop()
+
+五．框架Frame组件与标签框架LabelFrame组件
+1.小例子
+import tkinter
+top=tkinter.Tk()
+fm=tkinter.LabelFrame(top,width=200,height=500,text='LabelFrame')
+fm.pack()
+label1=tkinter.Label(fm,text='I like Python!',bg='white')
+label1.pack()
+top.mainloop()
+
+2.
+import tkinter
+top=tkinter.Tk()
+top.geometry('300x300+0+0')
+fm1=tkinter.LabelFrame(top,width=200,height=110,bg='white',\
+                       relief='ridge',bd=5,text='字体')
+fm1.grid(row=0,column=0,padx=50,pady=10)
+fm1.grid_propagate(0)
+
+fm2=tkinter.LabelFrame(top,width=200,height=130,bg='white',\
+                       relief='ridge',bd=5,text='字形')
+fm2.grid(row=1,column=0,padx=50,pady=10)
+fm2.grid_propagate(0)
+
+x=tkinter.IntVar()
+
+rb1=tkinter.Radiobutton(fm1,text='宋体')
+rb1.grid(row=0,column=0)
+rb2=tkinter.Radiobutton(fm1,text='黑体')
+rb2.grid(row=1,column=0)
+rb3=tkinter.Radiobutton(fm1,text='楷体')
+rb3.grid(row=2,column=0)
+rb1['variable'],rb2['variable'],rb3['variable']=x,x,x
+rb1['value'],rb2['value'],rb3['value']=0,1,2
+
+check1=tkinter.Checkbutton(fm2,text='加粗')
+check1.grid(row=0,column=0)
+check1.select()                 #处于被选中状态
+check2=tkinter.Checkbutton(fm2,text='倾斜')
+check2.grid(row=1,column=0)
+check3=tkinter.Checkbutton(fm2,text='下划线')
+check3.grid(row=2,column=0)
+check3.select()
+top.mainloop()
+
+
+六．列表框Listbox组件
+from tkinter import*
+root=Tk()
+def printLabel(x):
+    Label(root,text=lb.get(lb.curselection()),\
+          font=('黑体',48),bg='red').grid(row=0,column=0)
+
+lb=Listbox(root)
+lb.bind('<Button-1>',printLabel)
+lb.grid(row=1,column=0)
+for i in range(10):
+    lb.insert(END,str(i*100))
+root.mainloop()
+
+
+七．菜单组件
+import tkinter
+top=tkinter.Tk()
+top.geometry('300x450+100+100')
+top.wm_title('Python Shell')
+main_m=tkinter.Menu(top)
+item=tkinter.Menu(main_m,tearoff=0)
+for i in ['New File','Open','Open Module','Recent Files',\
+          'Class Browser','Path Browser']:
+    item.add_checkbutton(label=i)
+item.add_separator()
+for i in['Save','Save as','Save Copy AS']:
+    item.add_radiobutton(label=i)
+item.add_separator()
+item.add_radiobutton(label='Print Window',accelerator='Ctrl+P')
+item.add_separator()
+item.add_radiobutton(label='Close',accelerator='Alt+F4')
+item.add_radiobutton(label='Exit',accelerator='Ctrl+Q')
+main_m.add_cascade(label='File',menu=item)
+top['menu']=main_m
+top.mainloop()
+
+
+
+
+
+
+
+
+
